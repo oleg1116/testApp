@@ -26,7 +26,6 @@
 		},
 		data(){
 			return {
-				gamesList: [],
 				pages:0,
 				itemsPerPage: 16,
 				page:1,
@@ -34,14 +33,16 @@
 		},
 		mounted: async function() {
 			await this.$store.dispatch('getGames')
-			this.gamesList = this.$store.state.gamesList
 			this.pages = Math.ceil(this.gamesList.length / this.itemsPerPage)
 		},
 		computed: {
 			visibleGamesList() {
 				const pageIndex = this.page - 1
 				return this.gamesList.slice(pageIndex * this.itemsPerPage, pageIndex * this.itemsPerPage + this.itemsPerPage)
-			}
+			},
+			gamesList() {
+				return this.$store.state.gamesList
+			},
 		},
 	}
 </script>

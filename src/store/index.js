@@ -4,7 +4,7 @@ import {API_LOGIN, API_REFRESH_TOKEN, API_GET_GAMES, API_GET_USER_BALANCE} from 
 
 Vue.use(Vuex)
 
-const tokenRefreshTime = 80 * 1000
+const tokenRefreshTime = 800 * 1000
 const balanceRefreshTime = 30 * 1000
 
 export default new Vuex.Store({

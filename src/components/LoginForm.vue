@@ -18,21 +18,25 @@
 				login:'',
 				password:'',
 				loginError:'',
+				loginProcessing:false,
 			}
 		},
 		computed: {
 			loginSubmitDisabled() {
-				return this.login.trim() === '' || this.password.trim() === ''
+				return this.login.trim() === '' || this.password.trim() === '' || this.loginProcessing
 			}
 		},
 		methods:{
 			async submitLogin(){
 				this.loginError = ''
+				this.loginProcessing = true
 				try {
 					await this.$store.dispatch('loginUser', {login: this.login, password:this.password})
-					this.$router.push('/');
+					this.$router.push('/')
 				} catch (err) {
 					this.loginError = 'Login failed, please try again.'
+				} finally {
+					this.loginProcessing = false
 				}
 			}
 		}

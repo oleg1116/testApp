@@ -32,10 +32,13 @@
 		color: firebrick;
 	}
 	.page-item {
-		padding: 5px 8px;
 		margin: 0 10px;
 		background: lightslategray;
 		border:1px solid black;
+	}
+	.page-item a {
+		display:inline-block;
+		padding: 5px 8px;
 	}
 	.page-item.active {
 		background: whitesmoke;

@@ -5,8 +5,8 @@
 				<img :src="imageUrl" :alt="title + ' image'" class="game-card__image">
 			</div>
 		</div>
-		<h3 class="mt-12px">{{title}}</h3>
-		<base-button @click="playDemo(id)">  Play Demo </base-button>
+		<h3 class="mt-12px game-card__title">{{title}}</h3>
+		<base-button @click="playDemo(id)" :is-disabled="linkLoading">  Play Demo </base-button>
 		<div v-show="error" class="error-text mt-8px">{{error}}</div>
 	</div>
 </template>
@@ -34,16 +34,20 @@
 		data () {
 			return {
 				error: '',
+				linkLoading:false,
 			}
 		},
 		methods: {
 			async playDemo(gameId) {
+				this.linkLoading = true
 				try {
 					this.error=''
 					const demoLinkResponse = await API_GET_GAME_URL(gameId)
 					window.location.href = demoLinkResponse.data.data[0].attributes['launch-options']['game-url']
 				} catch (err) {
 					this.error = 'Failed to generate demo link. Please try again later.'
+				} finally {
+					this.linkLoading = false
 				}
 
 			}
@@ -80,5 +84,8 @@
 		height:100%;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	.game-card__title {
+		min-height: 2.4em;
 	}
 </style>
