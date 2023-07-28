@@ -1,5 +1,6 @@
 <template>
 	<div id="app">
+		<div class="header"></div>
 		<router-view/>
 	</div>
 </template>
@@ -17,17 +18,8 @@
 		color: #2c3e50;
 	}
 
-	nav {
-		padding: 30px;
-	}
-
-	nav a {
-		font-weight: bold;
-		color: #2c3e50;
-	}
-
-	nav a.router-link-exact-active {
-		color: #42b983;
+	.header{
+		height:80px
 	}
 
 	.mt-8px {
@@ -38,5 +30,14 @@
 	}
 	.error-text {
 		color: firebrick;
+	}
+	.page-item {
+		padding: 5px 8px;
+		margin: 0 10px;
+		background: lightslategray;
+		border:1px solid black;
+	}
+	.page-item.active {
+		background: whitesmoke;
 	}
 </style>

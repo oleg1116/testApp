@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import "normalize.css"
 import globalComponents from './components/global'
+import Paginate from 'vuejs-paginate'
+
+Vue.component('paginate', Paginate)
 
 // Register global components
 globalComponents.forEach(c => {

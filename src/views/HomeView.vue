@@ -24,11 +24,15 @@
 <style scoped>
 	.main-content {
 		padding:0 12px;
-		margin-left:180px;
 	}
 	.home {
 		max-width: 1600px;
 		margin-left: auto;
 		margin-right: auto;
+	}
+	@media (min-width: 576px) {
+		.main-content {
+			margin-left:180px;
+		}
 	}
 </style>

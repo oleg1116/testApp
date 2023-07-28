@@ -4,7 +4,7 @@ import {API_LOGIN, API_REFRESH_TOKEN, API_GET_GAMES, API_GET_USER_BALANCE} from 
 
 Vue.use(Vuex)
 
-const tokenRefreshTime = 800 * 1000
+const tokenRefreshTime = 80 * 1000
 const balanceRefreshTime = 30 * 1000
 
 export default new Vuex.Store({
@@ -12,7 +12,12 @@ export default new Vuex.Store({
 		tokenRefreshTimeout: null,
 		token: '',
 		gamesList: [],
-		userBalance: {},
+		userBalance: {
+			available:0,
+			bonus:0,
+			'':0,
+			currency:'USD',
+		},
 	},
 	getters: {},
 	mutations: {
@@ -47,7 +52,7 @@ export default new Vuex.Store({
 		async refreshToken({commit, dispatch}, previousRefreshToken) {
 			try {
 				const refreshResponse = await API_REFRESH_TOKEN(previousRefreshToken)
-				const {token, 'refresh-token': refreshToken, 'life-time': lifeTime} = refreshResponse
+				const {token, 'refresh-token': refreshToken, 'life-time': lifeTime} = refreshResponse.data
 				const tokenRefreshTimeout = setTimeout(() => dispatch('refreshToken', refreshToken), tokenRefreshTime)
 				commit('setTokenRefreshTimeout', tokenRefreshTimeout)
 				commit('setToken', token)
@@ -72,7 +77,7 @@ export default new Vuex.Store({
 		async getGames({commit}) {
 			try {
 				const gamesListResponse = await API_GET_GAMES()
-				commit('setGamesList', gamesListResponse.data.data.slice(0,20))
+				commit('setGamesList', gamesListResponse.data.data)
 
 			} catch (err) {
 				console.log('Failed to get games list' + err)
