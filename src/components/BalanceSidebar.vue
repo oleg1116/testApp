@@ -38,7 +38,6 @@
 		},
 		mounted: async function() {
 			await this.$store.dispatch('getUserBalance')
-			this.balance = this.$store.state.userBalance
 		},
 		methods:{
 			toggleMobileSidebarVisibility(){
